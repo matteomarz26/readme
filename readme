@@ -1,0 +1,41 @@
+let circles = []; // This will hold all the circles
+
+function setup() {
+    createCanvas(800, 600); 
+
+    for (let i = 0; i < 10; i++) {
+        circles.push({
+            x: random(width), // Random x position
+            y: random(height), // Random y position
+            r: random(20, 50), // Random size (radius)
+            dx: random(-3, 3), // Random speed in x direction
+            dy: random(-3, 3), // Random speed in y direction
+            color: [random(255), random(255), random(255)] // Random
+color (RGB)
+        });
+    }
+}
+
+function draw() {
+    background(200); 
+
+    for (let i = 0; i < circles.length; i++) {
+        let circle = circles[i]; 
+
+        
+        circle.x += circle.dx; 
+        circle.y += circle.dy;
+if (circle.x - circle.r < 0 || circle.x + circle.r > width) {
+            circle.dx *= -1; 
+        }
+        if (circle.y - circle.r < 0 || circle.y + circle.r > height) {
+            circle.dy *= -1; 
+        }
+  circle.color[0] = (circle.color[0] + random(-5, 5)) % 255; // Change red
+        circle.color[1] = (circle.color[1] + random(-5, 5)) % 255; // Change green
+        circle.color[2] = (circle.color[2] + random(-5, 5)) % 255; // Change blue
+  fill(circle.color[0], circle.color[1], circle.color[2]); // Use its color
+        noStroke(); 
+        ellipse(circle.x, circle.y, circle.r * 2); // Draw the circle
+    }
+}
